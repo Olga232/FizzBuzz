@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"org.example.util","l":"FizzBuzz"},{"p":"org.example.util.impl","l":"FizzBuzzDetector"},{"p":"org.example.util.impl","l":"FizzBuzzDetectorTest"},{"p":"org.example.model","l":"OverlappedResult"},{"p":"org.example.model","l":"OverlappedResult.OverlappedResultBuilder"}]
