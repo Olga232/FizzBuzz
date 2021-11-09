@@ -3,6 +3,7 @@ package org.example.util.impl;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
 
 import org.example.model.OverlappedResult;
@@ -30,6 +31,11 @@ public class FizzBuzzDetector implements FizzBuzz {
 	private static final String INVALID_INPUT_LENGTH_LOG = "Invalid input length: %d";
 	private static final String GET_INPUT_LOG = "Get input";
 	private static final String OVERLAPPED_SUCCESSFULLY_LOG = "Input overlapped successfully";
+	private static FileHandler fileHandler;
+	
+	static {
+        setUpLoggerFileHandler();
+    }
 	
 	/**
 	 * 
@@ -42,7 +48,6 @@ public class FizzBuzzDetector implements FizzBuzz {
 	 */
 	@Override
 	public OverlappedResult getOverlappings(String input) throws IllegalArgumentException {
-		setUpLoggerFileHandler();
 		checkInputConstraints(input);
 		
 		LOG.info(GET_INPUT_LOG);
@@ -87,14 +92,15 @@ public class FizzBuzzDetector implements FizzBuzz {
 				.build();
 	}
 	
-	private void setUpLoggerFileHandler() {
+	private static void setUpLoggerFileHandler() {
 		try {
-			FileHandler fileHandler = new FileHandler("FizzBuzzDetector.log");
-			LOG.setUseParentHandlers(false);
+        	fileHandler = new FileHandler("FizzBuzzDetector.log", true);
+        	fileHandler.setFormatter(new SimpleFormatter());
+        	LOG.setUseParentHandlers(false);
 			LOG.addHandler(fileHandler);
-		} catch (SecurityException | IOException e) {
-			LOG.severe(e.getMessage());
-		}
+        } catch (IOException | SecurityException e) {
+        	throw new RuntimeException(e.getMessage());
+        }
 	}
 	
 	private void checkInputConstraints(String input) throws IllegalArgumentException {

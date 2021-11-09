@@ -50,8 +50,8 @@ public class OverlappedResult {
 
 	@Override
 	public String toString() {
-		return "OverlappedResult [outputString=" + outputString 
-				+ ", coincidencesCounter=" + coincidencesCounter + "]";
+		return "output string:\n" + outputString + "\n\n"
+				+ "count: " + coincidencesCounter;
 	}
 	
 	
